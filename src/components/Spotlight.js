@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { SearchIcon } from "@heroicons/react/outline";
+import useSlice from "../hooks/appSlice";
 function Spotlight() {
   const [search, setSearch] = useState(null);
   const [results, setResults] = useState(null);
@@ -11,7 +12,7 @@ function Spotlight() {
   ];
   useEffect(() => {
     const matches =
-      search?.length > 2 &&
+      search?.length > 1 &&
       appList.filter((element) => {
         if (element.name.toLowerCase().indexOf(search.toLowerCase()) !== -1) {
           return true;
@@ -20,9 +21,14 @@ function Spotlight() {
     const web = [{ name: search }, { name: search }];
     setResults([web, matches]);
   }, [search]);
-
+  const { controlStates } = useSlice();
   return (
-    <div className="absolute flex flex-col top-1/4">
+    <div
+      className={
+        "absolute flex flex-col top-1/4 " +
+        (controlStates.spotlight ? " block" : " hidden")
+      }
+    >
       <div
         className={
           "flex flex-row px-3 py-3 bg-white/40 backdrop-blur-xl shadow-xl " +
@@ -39,7 +45,7 @@ function Spotlight() {
       </div>
 
       {search && (
-        <div className="bg-white/40 backdrop-blur-xl shadow-xl border-t border-gray-400/40 py-2 px-3 rounded-b-xl">
+        <div className="bg-white/40 cursor-default backdrop-blur-xl shadow-xl border-t border-gray-400/40 py-2 px-3 rounded-b-xl">
           {results.map((item, index) => (
             <div
               key={`spotlist.main${index}`}

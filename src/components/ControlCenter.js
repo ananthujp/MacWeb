@@ -105,7 +105,10 @@ function ControlCenter() {
   return (
     <motion.div
       exit={{ opacity: 0, transition: { duration: 0.5 } }}
-      className="absolute top-7  text-sm right-2 flex flex-col bg-white/30 backdrop-blur-xl shadow-sm p-2 rounded-xl"
+      className={
+        "absolute top-7  text-sm right-2 flex flex-col bg-white/30 backdrop-blur-xl shadow-sm p-2 rounded-xl " +
+        (controlStates.show ? " block" : " hidden")
+      }
     >
       <div className="flex flex-row">
         <div className="flex flex-col justify-between bg-white/10 backdrop-blur-xl mr-1 shadow-sm p-2 rounded-xl">

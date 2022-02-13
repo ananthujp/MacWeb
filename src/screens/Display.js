@@ -6,8 +6,10 @@ import NavBar from "../elements/NavBar";
 import useSlice from "../hooks/appSlice";
 import bg from "../Images/bg-day.webp";
 import ControlCenter from "../components/ControlCenter";
-import { AnimatePresence } from "framer-motion";
 import Spotlight from "../components/Spotlight";
+import Window from "../elements/Window";
+
+import Notes from "../Apps/Notes";
 const Items = [
   [{ name: "New Folder" }],
   [{ name: "Get Info" }, { name: "Change Desktop Background.." }],
@@ -74,11 +76,11 @@ function Display() {
       style={{ backgroundImage: `url(${bg})` }}
     >
       <BrightOverlay />
-      <AnimatePresence>
-        {controlStates.show && <ControlCenter />}
-      </AnimatePresence>
-      {controlStates.spotlight && <Spotlight />}
-
+      <ControlCenter />
+      <Spotlight />
+      <Window>
+        <Notes />
+      </Window>
       <ContextMenu
         Items={context.items}
         show={context.show}
