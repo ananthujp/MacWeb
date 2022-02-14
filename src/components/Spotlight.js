@@ -25,7 +25,7 @@ function Spotlight() {
   return (
     <div
       className={
-        "absolute flex flex-col top-1/4 " +
+        "absolute flex z-50 flex-col top-1/4 " +
         (controlStates.spotlight ? " block" : " hidden")
       }
     >

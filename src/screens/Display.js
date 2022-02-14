@@ -10,6 +10,8 @@ import Spotlight from "../components/Spotlight";
 import Window from "../elements/Window";
 
 import Notes from "../Apps/Notes";
+import Maps from "../Apps/Maps";
+import Calendar from "../Apps/Calendar";
 const Items = [
   [{ name: "New Folder" }],
   [{ name: "Get Info" }, { name: "Change Desktop Background.." }],
@@ -79,7 +81,7 @@ function Display() {
       <ControlCenter />
       <Spotlight />
       <Window>
-        <Notes />
+        <Calendar />
       </Window>
       <ContextMenu
         Items={context.items}
