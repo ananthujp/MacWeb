@@ -85,35 +85,121 @@ const month = (m, y) => {
   }
   return Days;
 };
+const Timeline = () => {
+  const time = [
+    "12 AM",
+    "1 AM",
+    "2 AM",
+    "3 AM",
+    "4 AM",
+    "5 AM",
+    "6AM",
+    "7 AM",
+    "8 AM",
+    "9 AM",
+    "10 AM",
+    "11 AM",
+    "12 PM",
+    "1 PM",
+    "2 PM",
+    "3 PM",
+    "4 PM",
+    "5 PM",
+    "6 PM",
+    "7 PM",
+    "8 PM",
+    "9 PM",
+    "10 PM",
+    "11 PM",
+  ];
+  return (
+    <div className="grid text-left grid-cols-[50px_90%] mt-12 px-6 grid-rows-6 w-full">
+      {time.map((dc) => (
+        <>
+          <div className="">{dc}</div>
+          <div className="h-3 border-b border-gray-300"></div>
+        </>
+      ))}
+    </div>
+  );
+};
+const monthd = (m, y, d) => {
+  const date = new Date();
+  date.setDate(1);
+  date.setMonth(m);
+  date.setYear(y);
+  const lastDay = new Date(date.getFullYear(), m + 1, 0).getDate();
+  const prevLastDay = new Date(date.getFullYear(), m, 0).getDate();
+  let Days = [];
+  for (let i = date.getDay() - 1; i >= 0; i--) {
+    Days.push(<div className="text-gray-300">{prevLastDay - i}</div>);
+  }
+  for (let i = 1; i <= lastDay; i++) {
+    (i === new Date().getDate() || i === d) &&
+    m === new Date().getMonth() &&
+    y === new Date().getFullYear()
+      ? Days.push(
+          <div
+            className={
+              "text-white px-1 rounded-full" +
+              (i === d ? " bg-gray-500" : " bg-red-500")
+            }
+          >
+            {i}
+          </div>
+        )
+      : Days.push(<div>{i}</div>);
+  }
+  for (let i = 1; Days.length < 42; i++) {
+    Days.push(<div className="text-gray-300">{i}</div>);
+  }
+  if (Days.length > 35) {
+    for (let i = 1; Days.length < 42; i++) {
+      Days.push(<div className="text-gray-300">{i}</div>);
+    }
+  }
+  return Days;
+};
 const DayView = () => {
   const [d, setD] = useState({
     d: new Date().getDate(),
     m: new Date().getMonth(),
     y: new Date().getFullYear(),
   });
-  const Days = month(d.m, d.y);
-  useEffect(() => {
-    console.log(new Date(d.y, d.m + 1, 0).getDate());
-  }, [d]);
-
   return (
-    <div className="flex flex-col w-full  h-full">
-      <div className="flex flex-row mt-4 justify-between items-center px-4">
-        <div className="flex flex-row">
-          <h1 className="text-3xl font-bold">{d.d} &nbsp;</h1>
-          <h1 className="text-3xl font-bold">{months[d.m]} &nbsp;</h1>
-          <h1 className="text-3xl ">{d.y}</h1>
+    <div className="flex flex-row h-full">
+      <div className="flex flex-col w-full  h-full">
+        <div className="flex flex-row mt-4 justify-between items-center px-4">
+          <div className="flex flex-row">
+            <h1 className="text-3xl font-bold">{d.d} &nbsp;</h1>
+            <h1 className="text-3xl font-bold">{months[d.m]} &nbsp;</h1>
+            <h1 className="text-3xl ">{d.y}</h1>
+          </div>
         </div>
-        <div className="flex flex-row">
+        <h1 className="text-xl font-light ml-4">
+          {days[new Date(d.y, d.m, d.d).getDay()]}
+        </h1>
+        <div className="w-full border-b mx-4 border-gray-300"></div>
+        <Timeline />
+      </div>
+      <div className="flex flex-row items-start bg-gray-300">
+        <MonthDay m={d.m} y={d.y} d={d.d} />
+
+        <div className="flex flex-row mt-2">
           <div
             onClick={() =>
               setD({
-                y: d.m,
-                m: d.m,
-                d: d.m === new Date(d.y, d.m + 1, 0).getDate() ? 1 : d.m + 1,
+                y: d.m === 0 && d.d === 1 ? d.y - 1 : d.y,
+                m: d.d === 1 ? (d.m - 1 < 0 ? 11 : d.m - 1) : d.m,
+                d:
+                  d.d === 1
+                    ? new Date(d.y, d.m, 0).getDate()
+                    : d.d - 1 < 1
+                    ? 31
+                    : d.d - 1,
               })
             }
-            className="flex rounded-md cursor-default bg-white active:bg-gray-200 shadow-md px-1 mx-1 py-0.5 text-sm"
+            className="flex h-6 rounded-md cursor-default bg-white active:bg-gray-200 shadow-md px-1 mx-1 py-0.5 text-sm"
           >
             <ChevronLeftIcon className="w-4" />
           </div>
@@ -125,28 +211,34 @@ const DayView = () => {
                 y: new Date().getFullYear(),
               })
             }
-            className="flex rounded-md cursor-default bg-white active:bg-gray-200 shadow-md px-4 py-0.5 text-sm"
+            className="flex h-6 rounded-md cursor-default bg-white active:bg-gray-200 shadow-md px-4 py-0.5 text-sm"
           >
             Today
           </div>
           <div
             onClick={() =>
               setD({
-                y: d.y,
-                m: d.d === new Date(d.y, d.m + 1, 0).getDate() ? d.m + 1 : d.m,
-                d: d.d === new Date(d.y, d.m + 1, 0).getDate() ? 1 : d.d + 1,
+                y: d.m === 11 && d.d === 31 ? d.y + 1 : d.y,
+                m:
+                  d.d === new Date(d.y, d.m + 1, 0).getDate()
+                    ? d.m + 1 > 11
+                      ? 0
+                      : d.m + 1
+                    : d.m,
+                d:
+                  d.d === new Date(d.y, d.m + 1, 0).getDate()
+                    ? 1
+                    : d.d + 1 > 31
+                    ? 1
+                    : d.d + 1,
               })
             }
-            className="flex rounded-md cursor-default bg-white active:bg-gray-200 shadow-md px-1  mx-1 py-0.5 text-sm"
+            className="flex h-6 rounded-md cursor-default bg-white active:bg-gray-200 shadow-md px-1  mx-1 py-0.5 text-sm"
           >
             <ChevronRightIcon className="w-4" />
           </div>
         </div>
       </div>
-
-      <h1 className="text-xl font-light ml-4">
-        {days[new Date(d.y, d.m, d.d).getDay()]}
-      </h1>
     </div>
   );
 };
@@ -362,6 +454,78 @@ const YearView = () => {
 };
 const Month = ({ m, y }) => {
   const Days = month(m, y);
+
+  return (
+    <div className="flex flex-col justify-center scale-90">
+      <div className="text-red-500 mb-2 text-md">{months[m]}</div>
+      <div className="flex flex-row text-xs -ml-2">
+        <div className="flex flex-col items-center px-2">
+          <h1 className="text-gray-600">S</h1>
+          {Days.map(
+            (dc, index) =>
+              index % 7 === 0 && <h1 key={`days.y1view.${index}`}>{dc}</h1>
+          )}
+        </div>
+        <div className="flex flex-col items-center px-2">
+          <h1 className="text-gray-600">M</h1>
+          {Days.map(
+            (dc, index) =>
+              (index + 6) % 7 === 0 && (
+                <h1 key={`days.y2view.${index}`}>{dc}</h1>
+              )
+          )}
+        </div>
+        <div className="flex flex-col items-center px-2">
+          <h1 className="text-gray-600">T</h1>
+          {Days.map(
+            (dc, index) =>
+              (index + 5) % 7 === 0 && (
+                <h1 key={`days.y3view.${index}`}>{dc}</h1>
+              )
+          )}
+        </div>
+        <div className="flex flex-col items-center px-2">
+          <h1 className="text-gray-600">W</h1>
+          {Days.map(
+            (dc, index) =>
+              (index + 4) % 7 === 0 && (
+                <h1 key={`days.y4view.${index}`}>{dc}</h1>
+              )
+          )}
+        </div>
+        <div className="flex flex-col items-center px-2">
+          <h1 className="text-gray-600">T</h1>
+          {Days.map(
+            (dc, index) =>
+              (index + 3) % 7 === 0 && (
+                <h1 key={`days.y5view.${index}`}>{dc}</h1>
+              )
+          )}
+        </div>
+        <div className="flex flex-col items-center px-2">
+          <h1 className="text-gray-600">F</h1>
+          {Days.map(
+            (dc, index) =>
+              (index + 2) % 7 === 0 && (
+                <h1 key={`days.y6view.${index}`}>{dc}</h1>
+              )
+          )}
+        </div>
+        <div className="flex flex-col items-center px-2">
+          <h1 className="text-gray-600">S</h1>
+          {Days.map(
+            (dc, index) =>
+              (index + 1) % 7 === 0 && (
+                <h1 key={`days.y7view.${index}`}>{dc}</h1>
+              )
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+const MonthDay = ({ m, y, d }) => {
+  const Days = monthd(m, y, d);
 
   return (
     <div className="flex flex-col justify-center scale-90">
