@@ -28,8 +28,8 @@ function Window({ children }) {
     <Rnd
       bounds="parent"
       size={{
-        width: 800,
-        height: 400,
+        width: 960,
+        height: 600,
       }}
       dragHandleClassName="windowHandle"
       className={`absolute overflow-hidden bg-transparent w-full h-full shadow-md rounded-lg`}
