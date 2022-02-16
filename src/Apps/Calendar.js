@@ -113,13 +113,15 @@ const Timeline = () => {
     "11 PM",
   ];
   return (
-    <div className="grid text-left grid-cols-[50px_90%] mt-12 px-6 grid-rows-6 w-full">
-      {time.map((dc) => (
-        <>
-          <div className="">{dc}</div>
-          <div className="h-3 border-b border-gray-300"></div>
-        </>
-      ))}
+    <div className="overflow-auto">
+      <div className="grid text-left grid-cols-[50px_90%] mt-12 px-6 grid-rows-6 w-full">
+        {time.map((dc) => (
+          <>
+            <div className="mb-12">{dc}</div>
+            <div className="h-3 border-b border-gray-300"></div>
+          </>
+        ))}
+      </div>
     </div>
   );
 };
@@ -180,6 +182,7 @@ const DayView = () => {
           {days[new Date(d.y, d.m, d.d).getDay()]}
         </h1>
         <div className="w-full border-b mx-4 border-gray-300"></div>
+
         <Timeline />
       </div>
       <div className="flex flex-row items-start bg-gray-300">
@@ -404,16 +407,8 @@ const WeekView = () => {
           Sat&nbsp; {Days.slice(d.w * 7 + 6, d.w * 7 + 7)}
         </h1>
       </div>
-      <div className="grid text-right grid-cols-7 grid-rows-6 border-t  border-gray-200 h-full w-full mt-2">
-        {Days.map((dc, index) => (
-          <h1
-            key={`days.monthview.${index}`}
-            className="border-x border-gray-200 pr-2"
-          >
-            &nbsp;
-          </h1>
-        ))}
-      </div>
+
+      <Timeline />
     </div>
   );
 };
@@ -652,7 +647,7 @@ function Calendar() {
       <div className="flex flex-col bg-gray-50 w-full h-full ">
         <div
           className={
-            "windowHandle cursor-default flex flex-row justify-between items-center pl-4 text-sm font-bold text-gray-600 h-12 bg-gray-200 border-b border-gray-300"
+            "windowHandle cursor-default flex flex-row justify-between items-center pl-4 text-sm font-bold text-gray-600 h-12 min-h-[40px] bg-gray-200 border-b border-gray-300"
           }
         >
           <div
