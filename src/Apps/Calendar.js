@@ -115,10 +115,15 @@ const Timeline = () => {
   return (
     <div className="overflow-auto">
       <div className="grid text-left grid-cols-[50px_90%] mt-12 px-6 grid-rows-6 w-full">
-        {time.map((dc) => (
+        {time.map((dc, i) => (
           <>
-            <div className="mb-12">{dc}</div>
-            <div className="h-3 border-b border-gray-300"></div>
+            <div key={`time.child1${i}`} className="mb-12">
+              {dc}
+            </div>
+            <div
+              key={`time.child2${i}`}
+              className="h-3 border-b border-gray-300"
+            ></div>
           </>
         ))}
       </div>

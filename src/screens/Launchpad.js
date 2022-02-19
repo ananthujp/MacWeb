@@ -37,11 +37,11 @@ const Icons = [
     icon: "https://uploads-ssl.webflow.com/5f7081c044fb7b3321ac260e/5f708537f18e2cb27247c904_facetime.png",
   },
 ];
-function Launchpad() {
-  const { showLaunchpad } = useSlice();
-  useEffect(() => {
-    document.addEventListener("click", () => showLaunchpad(false));
-  }, []);
+function Launchpad({ hide }) {
+  // const { showLaunchpad } = useSlice();
+  // useEffect(() => {
+  //   document.addEventListener("click", () => showLaunchpad(false));
+  // }, []);
 
   return (
     <motion.div
@@ -51,6 +51,7 @@ function Launchpad() {
         scale: (1, 1),
         transition: { durations: 1 },
       }}
+      onClick={() => hide(false)}
       exit={{ opacity: 0, scale: (5, 5) }}
       className=" h-screen z-50 w-screen bg-cover bg-center"
       style={{ backgroundImage: `url(${bg})` }}

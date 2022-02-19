@@ -9,9 +9,15 @@ import ControlCenter from "../components/ControlCenter";
 import Spotlight from "../components/Spotlight";
 import Window from "../elements/Window";
 
+import Facetime from "../Apps/Facetime";
+import Finder from "../Apps/Finder";
 import Notes from "../Apps/Notes";
 import Maps from "../Apps/Maps";
+import Safari from "../Apps/Safari";
 import Calendar from "../Apps/Calendar";
+import { useSelector } from "react-redux";
+import { selectWindow } from "../reducer/appSlice";
+import Launchpad from "./Launchpad";
 const Items = [
   [{ name: "New Folder" }],
   [{ name: "Get Info" }, { name: "Change Desktop Background.." }],
@@ -40,8 +46,43 @@ const Items = [
 ];
 function Display() {
   const { context, setContext, controlStates, setState } = useSlice();
-
+  const [wDowsz, setWindow] = useState(null);
+  const [wDows, setWindowz] = useState(null);
+  const [launchpad, setLaunch] = useState(false);
+  //let wDowsz = [];
   //Constructors
+  useEffect(() => {
+    switch (wDowsz && wDowsz[0].status) {
+      case "launchpad":
+        setLaunch(true);
+        break;
+      case "open":
+        !wDows?.find((o) => o.name === wDowsz[0].name) &&
+          setWindowz(wDows ? wDows.concat(wDowsz) : wDowsz);
+        break;
+      case "close":
+        setWindowz(
+          wDows.filter((value) => {
+            return value !== wDows?.find((o) => o.name === wDowsz[0].name);
+          })
+        );
+      default:
+    }
+    // wDowsz[0].status === "open" &&
+    // !wDows?.find((o) => o.name === wDowsz[0].name) &&
+    // setWindowz(wDows ? wDows.concat(wDowsz) : wDowsz);
+
+    wDowsz &&
+      wDowsz[0].status === "close" &&
+      setWindowz(
+        wDows.filter((value) => {
+          return value !== wDows?.find((o) => o.name === wDowsz[0].name);
+        })
+      );
+
+    //console.log(wDows);
+  }, [wDowsz]);
+
   useEffect(() => {
     // context menu listeners starts here
     window.addEventListener("contextmenu", (e) => e.preventDefault());
@@ -59,6 +100,7 @@ function Display() {
     );
     document.addEventListener("click", (e) => {
       e.target.dataset.context !== "navigation-bar" &&
+        e.target.dataset.context !== "dock" &&
         setContext({
           ...context,
           show: false,
@@ -68,8 +110,29 @@ function Display() {
       e.target.dataset.context === "desktop" &&
         setState({ ...controlStates, show: false, spotlight: false });
     });
-    // context menu listeners ends here
+    //context menu listeners ends here
   }, []);
+  const windowSwitch = (wdow) => {
+    switch (wdow) {
+      case "Notes":
+        return <Notes />;
+      case "Facetime":
+        return <Facetime />;
+      case "Maps":
+        return <Maps />;
+      case "Finder":
+        return <Finder />;
+      case "Calendar":
+        return <Calendar />;
+      case "Safari":
+        return <Safari />;
+      default:
+        return <Finder />;
+    }
+  };
+  // useEffect(() => {
+  //   console.log(wDows);
+  // }, [wDows]);
 
   return (
     <div
@@ -79,10 +142,14 @@ function Display() {
     >
       <BrightOverlay />
       <ControlCenter />
+      {launchpad ? <Launchpad hide={setLaunch} /> : <></>}
       <Spotlight />
-      <Window>
-        <Calendar />
-      </Window>
+      {wDows?.map((wdow, i) => (
+        <Window key={`opened.Window${i}`} name={wdow.name} action={setWindow}>
+          {windowSwitch(wdow.name)}
+        </Window>
+      ))}
+
       <ContextMenu
         Items={context.items}
         show={context.show}
@@ -90,7 +157,7 @@ function Display() {
       />
 
       <NavBar />
-      <Dock />
+      <Dock openW={setWindow} />
     </div>
   );
 }
