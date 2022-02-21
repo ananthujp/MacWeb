@@ -99,7 +99,7 @@ function Safari() {
               <SearchIcon className="w-4 " />
               <input
                 type="text"
-                placeholder="Search or enter website name"
+                placeholder="https://www.google.com/"
                 className="outline-none bg-transparent w-64"
               />
             </div>
@@ -110,7 +110,14 @@ function Safari() {
             <DuplicateIcon className="w-8 -rotate-180 mx-1 hover:bg-gray-300/60 active:bg-gray-400/50 p-1.5 rounded-md" />
           </div>
         </div>
-        <div></div>
+        <div className="h-full">
+          <iframe
+            src={"https://www.google.com/webhp?igu=1"}
+            className="w-full h-full"
+            frameBorder="0"
+            title="Mac Chrome Url"
+          ></iframe>
+        </div>
       </div>
     </div>
   );

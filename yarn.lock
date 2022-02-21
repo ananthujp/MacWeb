@@ -6431,6 +6431,11 @@ pify@^2.0.0:
   resolved "https://registry.yarnpkg.com/pify/-/pify-2.3.0.tgz#ed141a6ac043a849ea588498e7dca8b15330e90c"
   integrity sha1-7RQaasBDqEnqWISY59yosVMw6Qw=
 
+pigeon-maps@^0.20.0:
+  version "0.20.0"
+  resolved "https://registry.yarnpkg.com/pigeon-maps/-/pigeon-maps-0.20.0.tgz#2b619a205c543691ba8395c4856ba721014e46e5"
+  integrity sha512-aBAibTi0GCNvdrbcI02u+Ac+lqDK+EEquhBnhtFcR5qE8jzKTp4bZoY3CubAqAxFhywJRMAfumC06j8VYoKlDw==
+
 pinkie-promise@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/pinkie-promise/-/pinkie-promise-2.0.1.tgz#2135d6dfa7a358c069ac9b178776288228450ffa"

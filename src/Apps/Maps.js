@@ -9,6 +9,7 @@ import {
 } from "@heroicons/react/outline";
 import { motion } from "framer-motion";
 import { HomeIcon, BriefcaseIcon } from "@heroicons/react/solid";
+import { Map, Marker } from "pigeon-maps";
 const sideBarItems = [
   {
     name: "Favourites",
@@ -103,12 +104,9 @@ function Maps() {
           </div>
         </div>
         <div className="flex flex-col w-full h-full items-center">
-          <iframe
-            className="w-full h-full"
-            src={
-              "https://www.google.com/maps/embed/v1/place?key=API_KEY&q=Space+Needle,Seattle+WA"
-            }
-          ></iframe>
+          <Map defaultCenter={[23.2114, 72.6842]} defaultZoom={11}>
+            <Marker width={50} anchor={[23.2114, 72.6842]} />
+          </Map>
         </div>
       </div>
     </div>
