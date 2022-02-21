@@ -45,7 +45,7 @@ const Items = [
     { name: "Show View Options" },
   ],
 ];
-function Display() {
+function Display({ handle }) {
   const { context, setContext, controlStates, setState } = useSlice();
   const [wDowsz, setWindow] = useState(null);
   const [wDows, setWindowz] = useState(null);
@@ -144,7 +144,7 @@ function Display() {
       style={{ backgroundImage: `url(${bg})` }}
     >
       <BrightOverlay />
-      <ControlCenter />
+      <ControlCenter handle={handle} />
       {launchpad ? <Launchpad hide={setLaunch} openW={setWindow} /> : <></>}
       <Spotlight />
       {wDows?.map((wdow, i) => (

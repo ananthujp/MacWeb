@@ -2,16 +2,15 @@ import { createSlice } from "@reduxjs/toolkit";
 export const appSlice = createSlice({
   name: "app",
   initialState: {
-    windows: null,
-    mouseX: null,
+    fullscreenHandle: null,
   },
   reducers: {
-    setWindow: (state, action) => {
-      state.windows = action.payload.windows;
+    setHandle: (state, action) => {
+      state.fullscreenHandle = action.payload.fullscreenHandle;
     },
   },
 });
 
-export const { setWindow } = appSlice.actions;
-export const selectWindow = (state) => state.app.windows;
+export const { setHandle } = appSlice.actions;
+export const selectHandle = (state) => state.app.fullscreenHandle;
 export default appSlice.reducer;

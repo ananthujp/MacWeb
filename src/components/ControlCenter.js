@@ -7,10 +7,12 @@ import {
   StatusOnlineIcon,
   DocumentDuplicateIcon,
   ChevronRightIcon,
+  TrendingUpIcon,
+  ZoomInIcon,
 } from "@heroicons/react/outline";
 import { motion } from "framer-motion";
 import Spinner from "./Spinner";
-import { MoonIcon } from "@heroicons/react/solid";
+import { MoonIcon, ZoomOutIcon } from "@heroicons/react/solid";
 import useSlice from "../hooks/appSlice";
 const Icon = ({ n, state }) => {
   const list = [
@@ -47,7 +49,7 @@ const Icon = ({ n, state }) => {
       );
   }
 };
-function ControlCenter() {
+function ControlCenter({ handle }) {
   const { controlStates, setState } = useSlice();
   const handleButtons = (n) => {
     switch (n) {
@@ -106,7 +108,7 @@ function ControlCenter() {
     <motion.div
       exit={{ opacity: 0, transition: { duration: 0.5 } }}
       className={
-        "absolute top-7  text-sm right-2 flex flex-col bg-white/30 backdrop-blur-xl shadow-sm p-2 rounded-xl " +
+        "absolute top-7 cursor-default text-sm right-2 flex flex-col bg-white/30 backdrop-blur-xl shadow-sm p-2 rounded-xl " +
         (controlStates.show ? " block" : " hidden")
       }
     >
@@ -163,11 +165,20 @@ function ControlCenter() {
             <Icon n={3} state={0} />
             <h1>Focus</h1>
           </div>
-          <div className="flex fle-row items-center bg-white/10 backdrop-blur-xl ml-1 mb-1 shadow-sm px-2 py-4 rounded-xl">
+          <div
+            onClick={handle.active ? handle.exit : handle.enter}
+            className="flex fle-row items-center bg-white/10 backdrop-blur-xl ml-1 mb-1 shadow-sm px-2 py-4 rounded-xl"
+          >
             <div className=" flex justify-center items-center mr-2 bg-gray-500/30 rounded-full w-8 h-8 text-black">
-              <DocumentDuplicateIcon className="w-5" />
+              {handle.active ? (
+                <ZoomOutIcon className="w-5" />
+              ) : (
+                <ZoomInIcon className="w-5" />
+              )}
             </div>
-            <h1 className="w-20">Screen Mirroring</h1>
+            <h1 className="w-20">
+              {handle.active ? "Exit FullScreen" : "Enter FullScreen"}
+            </h1>
           </div>
         </div>
       </div>
