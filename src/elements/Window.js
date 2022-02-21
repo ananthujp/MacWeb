@@ -1,14 +1,10 @@
 import React, { useState } from "react";
 import { Rnd } from "react-rnd";
 import { XIcon, CodeIcon, MinusIcon } from "@heroicons/react/outline";
-import { setWindow, selectWindow } from "../reducer/appSlice";
-import { useDispatch, useSelector } from "react-redux";
-function Window({ children, name, action }) {
-  const wDows = useSelector(selectWindow);
-  const dispatch = useDispatch();
+function Window({ children, name, action, config }) {
   const [state, setStates] = useState({
-    x: 0.5 * window.innerWidth,
-    y: 0.5 * window.innerHeight,
+    x: 0.5 * window.innerWidth - 0.5 * config.width,
+    y: 0.5 * window.innerHeight - 0.5 * config.height,
   });
   const Wbuttons = () => {
     const handleClose = () => {
@@ -46,7 +42,10 @@ function Window({ children, name, action }) {
       </div>
     );
   };
-  const [windowState, setState] = useState({ width: 800, height: 600 });
+  const [windowState, setState] = useState({
+    width: config.width,
+    height: config.height,
+  });
   return (
     <Rnd
       bounds="parent"
@@ -54,7 +53,7 @@ function Window({ children, name, action }) {
         width: windowState.width,
         height: windowState.height,
       }}
-      enableResizing={true}
+      enableResizing={config.resize}
       onResizeStop={(e, direction, ref, delta) => {
         setState({
           ...windowState,

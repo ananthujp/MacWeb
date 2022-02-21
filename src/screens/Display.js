@@ -18,6 +18,7 @@ import Calendar from "../Apps/Calendar";
 import { useSelector } from "react-redux";
 import { selectWindow } from "../reducer/appSlice";
 import Launchpad from "./Launchpad";
+import Calculator from "../Apps/Calculator";
 const Items = [
   [{ name: "New Folder" }],
   [{ name: "Get Info" }, { name: "Change Desktop Background.." }],
@@ -126,6 +127,8 @@ function Display() {
         return <Calendar />;
       case "Safari":
         return <Safari />;
+      case "Calculator":
+        return <Calculator />;
       default:
         return <Finder />;
     }
@@ -142,14 +145,18 @@ function Display() {
     >
       <BrightOverlay />
       <ControlCenter />
-      {launchpad ? <Launchpad hide={setLaunch} /> : <></>}
+      {launchpad ? <Launchpad hide={setLaunch} openW={setWindow} /> : <></>}
       <Spotlight />
       {wDows?.map((wdow, i) => (
-        <Window key={`opened.Window${i}`} name={wdow.name} action={setWindow}>
+        <Window
+          key={`opened.Window${i}`}
+          name={wdow.name}
+          config={wdow.window}
+          action={setWindow}
+        >
           {windowSwitch(wdow.name)}
         </Window>
       ))}
-
       <ContextMenu
         Items={context.items}
         show={context.show}

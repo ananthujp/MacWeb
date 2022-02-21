@@ -3,41 +3,8 @@ import bg from "../Images/bg-day.webp";
 import { SearchIcon } from "@heroicons/react/outline";
 import { motion } from "framer-motion";
 import useSlice from "../hooks/appSlice";
-const Icons = [
-  {
-    name: "Finder",
-    icon: "https://uploads-ssl.webflow.com/5f7081c044fb7b3321ac260e/5f70853981255cc36b3a37af_finder.png",
-  },
-  {
-    name: "Siri",
-    icon: "https://uploads-ssl.webflow.com/5f7081c044fb7b3321ac260e/5f70853ff3bafbac60495771_siri.png",
-  },
-  {
-    name: "Launchpad",
-    icon: "https://uploads-ssl.webflow.com/5f7081c044fb7b3321ac260e/5f70853943597517f128b9b4_launchpad.png",
-  },
-  {
-    name: "Contacts",
-    icon: "https://uploads-ssl.webflow.com/5f7081c044fb7b3321ac260e/5f70853743597518c528b9b3_contacts.png",
-  },
-  {
-    name: "Notes",
-    icon: "https://uploads-ssl.webflow.com/5f7081c044fb7b3321ac260e/5f70853c849ec3735b52cef9_notes.png",
-  },
-  {
-    name: "Reminders",
-    icon: "https://uploads-ssl.webflow.com/5f7081c044fb7b3321ac260e/5f70853d44d99641ce69afeb_reminders.png",
-  },
-  {
-    name: "Photos",
-    icon: "https://uploads-ssl.webflow.com/5f7081c044fb7b3321ac260e/5f70853c55558a2e1192ee09_photos.png",
-  },
-  {
-    name: "Facetime",
-    icon: "https://uploads-ssl.webflow.com/5f7081c044fb7b3321ac260e/5f708537f18e2cb27247c904_facetime.png",
-  },
-];
-function Launchpad({ hide }) {
+import { Icons } from "../Data/appData";
+function Launchpad({ hide, openW }) {
   // const { showLaunchpad } = useSlice();
   // useEffect(() => {
   //   document.addEventListener("click", () => showLaunchpad(false));
@@ -77,7 +44,16 @@ function Launchpad({ hide }) {
               key={`launchpad.icons.${index}`}
               className="flex flex-col items-center mt-8 active:opacity-30"
             >
-              <img src={doc.icon} alt="" className="w-24 mx-6" />
+              <div
+                onClick={() =>
+                  openW([
+                    { name: doc.name, window: doc.window, status: "open" },
+                  ])
+                }
+                className="w-24 mx-6"
+              >
+                {doc.icon}
+              </div>
               <h1 className="text-white/80 text-xs">{doc.name}</h1>
             </div>
           ))}

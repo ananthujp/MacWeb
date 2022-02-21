@@ -91,7 +91,7 @@ function Facetime() {
           ))}
         </div>
       </div>
-      <div className="windowHandle flex flex-col bg-gray-900 w-full h-full ">
+      <div className="windowHandle flex flex-col justify-center bg-gray-900 w-full h-full ">
         <Webcam className="w-full overflow-auto" />
       </div>
     </div>
