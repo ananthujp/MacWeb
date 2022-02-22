@@ -16,10 +16,10 @@ import { MoonIcon, ZoomOutIcon } from "@heroicons/react/solid";
 import useSlice from "../hooks/appSlice";
 const Icon = ({ n, state }) => {
   const list = [
-    <WifiIcon className="w-5" />,
-    <ScaleIcon className="w-5" />,
-    <StatusOnlineIcon className="w-5" />,
-    <MoonIcon className="w-5" />,
+    <WifiIcon className="w-4" />,
+    <ScaleIcon className="w-4" />,
+    <StatusOnlineIcon className="w-4" />,
+    <MoonIcon className="w-4" />,
     <Spinner />,
   ];
   switch (state) {
@@ -108,7 +108,7 @@ function ControlCenter({ handle }) {
     <motion.div
       exit={{ opacity: 0, transition: { duration: 0.5 } }}
       className={
-        "absolute top-7 cursor-default text-sm right-2 flex flex-col bg-white/30 backdrop-blur-xl shadow-sm p-2 rounded-xl " +
+        "absolute top-7 cursor-default text-xs right-2 flex flex-col bg-white/30 backdrop-blur-xl shadow-sm p-2 rounded-xl " +
         (controlStates.show ? " block" : " hidden")
       }
     >
@@ -118,11 +118,11 @@ function ControlCenter({ handle }) {
             onClick={() => handleButtons(0)}
             className="flex flex-row group justify-between"
           >
-            <div className="flex flex-row w-32">
+            <div className="flex flex-row w-32 ">
               <Icon n={0} state={controlStates.wifi} />
               <div>
                 <h1>Wi-Fi</h1>
-                <h1 className="text-xs">{controlStates.wifiState}</h1>
+                <h1 className="text-xxs">{controlStates.wifiState}</h1>
               </div>
             </div>
             <div className="w-4 flex items-center">
@@ -137,7 +137,7 @@ function ControlCenter({ handle }) {
               <Icon n={1} state={controlStates.bt} />
               <div>
                 <h1>Bluetooth</h1>
-                <h1 className="text-xs">{controlStates.btState}</h1>
+                <h1 className="text-xxs">{controlStates.btState}</h1>
               </div>
             </div>
             <div className="w-4 flex items-center">
@@ -152,7 +152,7 @@ function ControlCenter({ handle }) {
               <Icon n={2} state={controlStates.ad} />
               <div>
                 <h1>AirDrop</h1>
-                <h1 className="text-xs">{controlStates.adState}</h1>
+                <h1 className="text-xxs">{controlStates.adState}</h1>
               </div>
             </div>
             <div className="w-4 flex items-center">
@@ -171,9 +171,9 @@ function ControlCenter({ handle }) {
           >
             <div className=" flex justify-center items-center mr-2 bg-gray-500/30 rounded-full w-8 h-8 text-black">
               {handle.active ? (
-                <ZoomOutIcon className="w-5" />
+                <ZoomOutIcon className="w-4" />
               ) : (
-                <ZoomInIcon className="w-5" />
+                <ZoomInIcon className="w-4" />
               )}
             </div>
             <h1 className="w-20">
@@ -184,11 +184,11 @@ function ControlCenter({ handle }) {
       </div>
       <div
         className="flex flex-col bg-white/10 mt-2 backdrop-blur-xl
-shadow-sm px-2 py-2 rounded-xl w-full"
+shadow-sm px-2 py-2 rounded-lg w-full"
       >
         <div className="mb-1">Display</div>
-        <div className="flex flex-row items-center group">
-          <div className="w-5 h-[25px] flex pl-1 items-center rounded-l-full transition-all bg-gray-50/60 group-hover:bg-gray-50/90 text-gray-800">
+        <div className="flex border border-gray-500/30 rounded-full flex-row items-center group">
+          <div className="w-5 h-[21px] flex pl-1 items-center rounded-l-full transition-all bg-gray-50/60 group-hover:bg-gray-50/90 text-gray-800/50">
             <SunIcon />
           </div>
           <input
@@ -205,11 +205,11 @@ shadow-sm px-2 py-2 rounded-xl w-full"
       </div>
       <div
         className="bg-white/10 mt-2 backdrop-blur-xl
-shadow-sm px-2 py-2 rounded-xl"
+shadow-sm px-2 py-2 rounded-lg"
       >
         <div className="mb-1">Sound</div>
-        <div className="flex flex-row items-center group">
-          <div className="w-5 h-[25px] flex pl-1 items-center rounded-l-full transition-all bg-gray-50/60 group-hover:bg-gray-50/90 text-gray-800">
+        <div className="flex flex-row border border-gray-500/30 rounded-full items-center group">
+          <div className="w-5 h-[21px] flex pl-1 items-center rounded-l-full transition-all bg-gray-50/60 group-hover:bg-gray-50/90 text-gray-800/50">
             <VolumeUpIcon />
           </div>
 
