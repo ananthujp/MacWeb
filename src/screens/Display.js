@@ -164,6 +164,12 @@ function Display({ handle }) {
       />
 
       <NavBar />
+      <div className="absolute hidden flex-row justify-around px-14 items-center top-0 bg-black h-6 w-36 rounded-b-lg">
+        <div className="h-3 w-3 flex rounded-full bg-gray-800/80">
+          <div className="h-1 w-1 mx-auto my-auto rounded-full bg-gray-700/60"></div>
+        </div>
+        <div className="h-1 w-1 rounded-full bg-green-500"></div>
+      </div>
       <Dock openW={setWindow} />
     </div>
   );
