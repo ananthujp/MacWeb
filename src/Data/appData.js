@@ -133,4 +133,14 @@ export const Icons = [
     ),
     window: { width: 240, height: 310, resize: false },
   },
+  {
+    name: "Siri",
+    icon: (
+      <img
+        alt=""
+        src="https://uploads-ssl.webflow.com/5f7081c044fb7b3321ac260e/5f70853ff3bafbac60495771_siri.png"
+      />
+    ),
+    window: { width: 400, height: 80, resize: false },
+  },
 ];

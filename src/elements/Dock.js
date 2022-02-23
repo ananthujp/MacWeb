@@ -60,8 +60,8 @@ function Component({ openW }) {
     return (
       <div
         onClick={(e) => {
-          text === "Launchpad"
-            ? openW([{ name: text, status: "launchpad" }])
+          text === "Launchpad" || "Siri"
+            ? openW([{ name: text, status: text }])
             : openW([{ name: text, window: wdow, status: "open" }]);
           setLoad(true);
           setTimeout(() => setLoad(false), 1600);

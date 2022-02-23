@@ -2,15 +2,21 @@ import { createSlice } from "@reduxjs/toolkit";
 export const appSlice = createSlice({
   name: "app",
   initialState: {
-    fullscreenHandle: null,
+    camera: false,
+    mic: false,
   },
   reducers: {
-    setHandle: (state, action) => {
-      state.fullscreenHandle = action.payload.fullscreenHandle;
+    setCAM: (state, action) => {
+      state.camera = action.payload.camera;
+      state.mic = action.payload.mic;
     },
   },
 });
 
-export const { setHandle } = appSlice.actions;
-export const selectHandle = (state) => state.app.fullscreenHandle;
+export const { setCAM } = appSlice.actions;
+export const selectCAM = (state) => ({
+  camera: state.app.camera,
+  mic: state.app.mic,
+});
+
 export default appSlice.reducer;

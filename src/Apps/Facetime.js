@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { VideoCameraIcon, PaperClipIcon } from "@heroicons/react/solid";
 import Webcam from "react-webcam";
+import { useDispatch } from "react-redux";
+import { setCAM } from "../reducer/appSlice";
 const sideBarItems = [
   {
     name: "This Week",
@@ -39,6 +41,14 @@ const sideBarItems = [
   },
 ];
 function Facetime() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setCAM({ camera: true, mic: false }));
+    return () => {
+      dispatch(setCAM({ camera: false, mic: false }));
+    };
+  }, []);
+
   return (
     <div className="flex flex-row w-full h-full">
       <div className="flex flex-col bg-black/60 backdrop-blur-xl h-full w-auto ">

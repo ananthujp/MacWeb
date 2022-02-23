@@ -48,7 +48,7 @@ const sideBarItems = [
   },
 ];
 function Safari() {
-  const [sidebar, setSidebar] = useState(false);
+  const [sidebar, setSidebar] = useState(true);
   return (
     <div className="flex flex-row w-full h-full">
       <motion.div

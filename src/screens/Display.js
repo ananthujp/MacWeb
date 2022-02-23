@@ -19,6 +19,8 @@ import { useSelector } from "react-redux";
 import { selectWindow } from "../reducer/appSlice";
 import Launchpad from "./Launchpad";
 import Calculator from "../Apps/Calculator";
+import Notch from "../elements/Notch";
+import Siri from "../Apps/Siri";
 const Items = [
   [{ name: "New Folder" }],
   [{ name: "Get Info" }, { name: "Change Desktop Background.." }],
@@ -50,12 +52,16 @@ function Display({ handle }) {
   const [wDowsz, setWindow] = useState(null);
   const [wDows, setWindowz] = useState(null);
   const [launchpad, setLaunch] = useState(false);
+  const [siri, setSiri] = useState(false);
   //let wDowsz = [];
   //Constructors
   useEffect(() => {
     switch (wDowsz && wDowsz[0].status) {
-      case "launchpad":
+      case "Launchpad":
         setLaunch(true);
+        break;
+      case "Siri":
+        setSiri(true);
         break;
       case "open":
         !wDows?.find((o) => o.name === wDowsz[0].name) &&
@@ -164,12 +170,8 @@ function Display({ handle }) {
       />
 
       <NavBar />
-      <div className="absolute flex flex-row justify-around px-14 items-center top-0 bg-black h-6 w-36 rounded-b-lg">
-        <div className="h-3 w-3 flex rounded-full bg-gray-800/80">
-          <div className="h-1 w-1 mx-auto my-auto rounded-full bg-gray-700/60"></div>
-        </div>
-        <div className="h-1 w-1 rounded-full bg-green-500"></div>
-      </div>
+      {siri ? <Siri hide={setSiri} /> : <></>}
+      <Notch />
       <Dock openW={setWindow} />
     </div>
   );
