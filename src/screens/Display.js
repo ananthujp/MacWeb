@@ -79,7 +79,6 @@ function Display({ handle }) {
         break;
       default:
     }
-    wDows && Object.keys(wDows).map((dc) => console.log(wDows[dc].name));
   }, [wDowsz]);
 
   useEffect(() => {
@@ -131,9 +130,6 @@ function Display({ handle }) {
         return <Finder />;
     }
   };
-  // useEffect(() => {
-  //   console.log(focus);
-  // }, [focus]);
 
   return (
     <div
