@@ -1,11 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import useSlice from "../hooks/appSlice";
 import { selectControlStates } from "../reducer/appSlice";
 
 function BrightOverlay() {
-  const { controlStates } = useSlice();
-
   const brightness = useSelector(selectControlStates);
   return (
     <div

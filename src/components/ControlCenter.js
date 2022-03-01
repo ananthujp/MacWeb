@@ -1,13 +1,9 @@
 import React from "react";
 import {
   WifiIcon,
-  ScaleIcon,
   SunIcon,
   VolumeUpIcon,
-  StatusOnlineIcon,
-  DocumentDuplicateIcon,
   ChevronRightIcon,
-  TrendingUpIcon,
   ZoomInIcon,
 } from "@heroicons/react/outline";
 import { motion } from "framer-motion";
@@ -19,8 +15,24 @@ import { selectControlStates, setControlStates } from "../reducer/appSlice";
 const Icon = ({ n, state }) => {
   const list = [
     <WifiIcon className="w-4" />,
-    <ScaleIcon className="w-4" />,
-    <StatusOnlineIcon className="w-4" />,
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 320.523 320.523"
+      fill="currentColor"
+      stroke="currentColor"
+      className="w-4"
+      xmlSpace="preserve"
+    >
+      <path d="m254.413 225.551-69.147-69.148 65.289-65.29L159.442 0v130.579L76.716 47.853 66.109 58.459l93.333 93.333v9.222l-93.333 93.333 10.606 10.606 82.726-82.726v138.296l94.972-94.972zM174.442 36.213l54.9 54.9-54.683 54.683-.218-.217.001-109.366zm0 131.014.218-.217 58.541 58.542-58.759 58.759V167.227z" />
+    </svg>,
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 30 30"
+      fill="currentColor"
+      className="w-5"
+    >
+      <path d="M15 3C7.832 3 2 8.832 2 16c0 4.774 2.593 8.944 6.44 11.205l1.08-1.682C6.227 23.62 4 20.07 4 16 4 9.935 8.935 5 15 5s11 4.935 11 11c0 4.069-2.227 7.62-5.52 9.523l1.08 1.682C25.408 24.945 28 20.774 28 16c0-7.168-5.832-13-13-13zm0 4c-4.962 0-9 4.038-9 9 0 3.364 1.86 6.3 4.602 7.844l1.08-1.684A7.003 7.003 0 0 1 8 16c0-3.86 3.14-7 7-7s7 3.14 7 7a7.007 7.007 0 0 1-3.682 6.162l1.08 1.682C22.14 22.299 24 19.364 24 16c0-4.962-4.038-9-9-9zm0 4c-2.757 0-5 2.243-5 5 0 1.955 1.138 3.633 2.777 4.455l1.082-1.682A3.003 3.003 0 0 1 12 16c0-1.654 1.346-3 3-3s3 1.346 3 3a3 3 0 0 1-1.861 2.771l1.082 1.684C18.86 19.635 20 17.955 20 16c0-2.757-2.243-5-5-5zm0 4a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1z" />
+    </svg>,
     <MoonIcon className="w-4" />,
     <Spinner />,
   ];

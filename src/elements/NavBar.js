@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useSlice from "../hooks/appSlice";
 
-import {
-  FireIcon,
-  RefreshIcon,
-  SearchIcon,
-  WifiIcon,
-  AdjustmentsIcon,
-} from "@heroicons/react/outline";
+import { SearchIcon, WifiIcon } from "@heroicons/react/outline";
 
 const appleMenu = [
   [{ name: "About This Mac" }],
@@ -127,7 +121,7 @@ function NavBar() {
               })
             }
             key={`Nav.left.${index}`}
-            className="h-5 px-2 rounded-sm hover:bg-white/20 active:bg-white/20 text-sm"
+            className="items-center flex h-6 px-2 rounded-sm hover:bg-white/20 active:bg-white/20 text-sm"
           >
             {item.name}
           </div>
@@ -137,7 +131,7 @@ function NavBar() {
         {RightItems.map((item, index) => (
           <div
             key={`Nav.right.${index}`}
-            className="h-5 mx-0 text-sm px-2 rounded-sm active:bg-white/20"
+            className="items-center flex h-6 mx-0 text-sm px-2 rounded-sm active:bg-white/20"
           >
             {item}
           </div>

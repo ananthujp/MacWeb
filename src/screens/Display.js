@@ -54,9 +54,6 @@ function Display({ handle }) {
   const [focus, setFocus] = useState(null);
   //let wDowsz = [];
   //Constructors
-  const windowFocus = (name) => {
-    setFocus(name);
-  };
   useEffect(() => {
     switch (wDowsz && wDowsz[0].status) {
       case "Launchpad":
@@ -73,13 +70,13 @@ function Display({ handle }) {
           [wDowsz[0].name]: wDowsz,
         }));
         setFocus(wDowsz[0].name);
-        //setWindowz(wDows ? wDows.concat(wDowsz) : wDowsz);
         break;
       case "close":
         setWindowz((prevState) => ({
           ...prevState,
           [wDowsz[0].name]: wDowsz,
         }));
+        break;
       default:
     }
     wDows && Object.keys(wDows).map((dc) => console.log(wDows[dc].name));
