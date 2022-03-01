@@ -15,8 +15,6 @@ import Notes from "../Apps/Notes";
 import Maps from "../Apps/Maps";
 import Safari from "../Apps/Safari";
 import Calendar from "../Apps/Calendar";
-import { useSelector } from "react-redux";
-import { selectWindow } from "../reducer/appSlice";
 import Launchpad from "./Launchpad";
 import Calculator from "../Apps/Calculator";
 import Notch from "../elements/Notch";
@@ -53,8 +51,12 @@ function Display({ handle }) {
   const [wDows, setWindowz] = useState(null);
   const [launchpad, setLaunch] = useState(false);
   const [siri, setSiri] = useState(false);
+  const [focus, setFocus] = useState(null);
   //let wDowsz = [];
   //Constructors
+  const windowFocus = (name) => {
+    setFocus(name);
+  };
   useEffect(() => {
     switch (wDowsz && wDowsz[0].status) {
       case "Launchpad":
@@ -64,30 +66,23 @@ function Display({ handle }) {
         setSiri(true);
         break;
       case "open":
-        !wDows?.find((o) => o.name === wDowsz[0].name) &&
-          setWindowz(wDows ? wDows.concat(wDowsz) : wDowsz);
+        //!wDows?.find((o) => o.name === wDowsz[0].name) &&
+
+        setWindowz((prevState) => ({
+          ...prevState,
+          [wDowsz[0].name]: wDowsz,
+        }));
+        setFocus(wDowsz[0].name);
+        //setWindowz(wDows ? wDows.concat(wDowsz) : wDowsz);
         break;
       case "close":
-        setWindowz(
-          wDows.filter((value) => {
-            return value !== wDows?.find((o) => o.name === wDowsz[0].name);
-          })
-        );
+        setWindowz((prevState) => ({
+          ...prevState,
+          [wDowsz[0].name]: wDowsz,
+        }));
       default:
     }
-    // wDowsz[0].status === "open" &&
-    // !wDows?.find((o) => o.name === wDowsz[0].name) &&
-    // setWindowz(wDows ? wDows.concat(wDowsz) : wDowsz);
-
-    wDowsz &&
-      wDowsz[0].status === "close" &&
-      setWindowz(
-        wDows.filter((value) => {
-          return value !== wDows?.find((o) => o.name === wDowsz[0].name);
-        })
-      );
-
-    //console.log(wDows);
+    wDows && Object.keys(wDows).map((dc) => console.log(wDows[dc].name));
   }, [wDowsz]);
 
   useEffect(() => {
@@ -140,8 +135,8 @@ function Display({ handle }) {
     }
   };
   // useEffect(() => {
-  //   console.log(wDows);
-  // }, [wDows]);
+  //   console.log(focus);
+  // }, [focus]);
 
   return (
     <div
@@ -153,7 +148,7 @@ function Display({ handle }) {
       <ControlCenter handle={handle} />
       {launchpad ? <Launchpad hide={setLaunch} openW={setWindow} /> : <></>}
       <Spotlight />
-      {wDows?.map((wdow, i) => (
+      {/* {wDows?.map((wdow, i) => (
         <Window
           key={`opened.Window${i}`}
           name={wdow.name}
@@ -162,7 +157,27 @@ function Display({ handle }) {
         >
           {windowSwitch(wdow.name)}
         </Window>
-      ))}
+      ))} */}
+      {wDows &&
+        Object.keys(wDows).map(
+          (dc, i) =>
+            wDows[dc][0].status === "open" && (
+              <Window
+                focus={focus === wDows[dc][0].name ? true : false}
+                key={`opened.Window${i}`}
+                name={wDows[dc][0].name}
+                config={wDows[dc][0].window}
+                action={setWindow}
+              >
+                <div
+                  onMouseDown={() => setFocus(wDows[dc][0].name)}
+                  className="w-full h-full"
+                >
+                  {windowSwitch(wDows[dc][0].name)}
+                </div>
+              </Window>
+            )
+        )}
       <ContextMenu
         Items={context.items}
         show={context.show}

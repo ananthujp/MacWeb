@@ -6,6 +6,7 @@ function Component({ openW }) {
   const mouseX = useMotionValue(null);
   const DocItem = ({ src, text, mouseX, wdow }) => {
     const [appload, setLoad] = useState(false);
+    const [loaded, setLoaded] = useState(false);
     const baseWidth = 50;
     const distanceLimit = baseWidth * 6;
     const beyondTheDistanceLimit = distanceLimit + 1;
@@ -60,11 +61,12 @@ function Component({ openW }) {
     return (
       <div
         onClick={(e) => {
-          text === "Launchpad" || "Siri"
+          text === "Launchpad" || text === "Siri"
             ? openW([{ name: text, status: text }])
             : openW([{ name: text, window: wdow, status: "open" }]);
-          setLoad(true);
+          !loaded && setLoad(true);
           setTimeout(() => setLoad(false), 1600);
+          setLoaded(true);
         }}
         className={
           "group flex flex-col items-center " +
@@ -83,7 +85,12 @@ function Component({ openW }) {
         >
           {src}
         </motion.div>
-        <div className="hidden w-1 h-1 rounded-full bg-white"></div>
+        <div
+          className={
+            "-mb-0.5 w-1 h-1 rounded-full bg-white " +
+            (loaded ? "" : " invisible")
+          }
+        ></div>
       </div>
     );
   };
@@ -93,7 +100,7 @@ function Component({ openW }) {
       onMouseMove={(e) => mouseX.set(e.nativeEvent.x)}
       onMouseLeave={() => mouseX.set(null)}
       className="absolute bottom-2 backdrop-blur-xl
-  bg-white/30 max-h-14 flex flex-row p-1 rounded-2xl items-end justify-center"
+  bg-white/30 max-h-16 flex flex-row p-1 rounded-2xl items-end justify-center z-50"
     >
       {Icons.map((items, index) => (
         <DocItem

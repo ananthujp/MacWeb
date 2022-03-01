@@ -1,5 +1,7 @@
 import { XIcon } from "@heroicons/react/outline";
 import React, { useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
+import { setCAM } from "../reducer/appSlice";
 const Canvas = (props) => {
   const canvasRef = useRef(null);
   function cycle(num1, num2) {
@@ -154,8 +156,14 @@ function Siri({ hide }) {
     i !== commands.length - 1 &&
       setTimeout(() => handleCommands(i + 1), commands[i].t * 1000);
   };
+  const dispatch = useDispatch();
+
   useEffect(() => {
     handleCommands(0);
+    dispatch(setCAM({ camera: false, mic: true }));
+    return () => {
+      dispatch(setCAM({ camera: false, mic: false }));
+    };
   }, []);
   return (
     <div className="absolute bg-black/30 rounded-md flex flex-col items-center justify-center backdrop-blur-lg w-64 h-auto py-4 right-8 top-8">

@@ -1,23 +1,14 @@
 import React, { useState } from "react";
 import { Rnd } from "react-rnd";
 import { XIcon, CodeIcon, MinusIcon } from "@heroicons/react/outline";
-function Window({ children, name, action, config }) {
+function Window({ children, name, action, config, focus }) {
   const [state, setStates] = useState({
     x: 0.5 * window.innerWidth - 0.5 * config.width,
     y: 0.5 * window.innerHeight - 0.5 * config.height,
   });
   const Wbuttons = () => {
     const handleClose = () => {
-      // dispatch(
-      //   setWindow({
-      //     windows: wDows.splice(
-      //       wDows.indexOf(wDows?.find((o) => o.name === name)),
-      //       1
-      //     ),
-      //   })
-      // );
       action([{ status: "close", name: name }]);
-      // console.log(wDows.slice().splice(2, 1));
     };
     return (
       <div className="absolute left-2 top-4 z-10 group flex flex-row">
@@ -66,7 +57,10 @@ function Window({ children, name, action, config }) {
       }}
       position={{ x: state.x, y: state.y }}
       dragHandleClassName="windowHandle"
-      className={`absolute overflow-hidden bg-transparent w-full h-full shadow-md rounded-lg`}
+      className={
+        `absolute overflow-hidden bg-transparent w-full h-full rounded-lg ` +
+        (focus ? " z-50  shadow-xl" : "  shadow-md")
+      }
     >
       <Wbuttons />
       {children}
