@@ -140,7 +140,7 @@ function Display({ handle, systemState }) {
       <BrightOverlay />
       <ControlCenter handle={handle} />
       {launchpad ? <Launchpad hide={setLaunch} openW={setWindow} /> : <></>}
-      <Spotlight />
+      <Spotlight openW={setWindow} />
       {/* {wDows?.map((wdow, i) => (
         <Window
           key={`opened.Window${i}`}

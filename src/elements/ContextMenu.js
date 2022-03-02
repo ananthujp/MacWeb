@@ -40,7 +40,6 @@ function ContextMenu({ Items, branch, show, options }) {
                   item.shade && setVis(`ctx${index}.sub.${i}.${item.name}`)
                 }
                 onMouseLeave={() => item.shade && setVis(false)}
-                onClick={() => !item.shade && console.log(item.name)}
                 key={`ctx${index}.sub.${i}`}
                 className="relative px-2 py-0.5 flex flex-row justify-between items-center hover:text-white rounded-md hover:bg-blue-500 "
               >

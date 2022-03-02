@@ -33,6 +33,7 @@ function Login({ state }) {
           ) : (
             <div className="flex flex-row mt-4 w-40 backdrop-blur-xl items-center text-white bg-white/30  shadow-lg rounded-full">
               <input
+                onKeyDown={(e) => e.key === "Enter" && handleLogin()}
                 type="password"
                 placeholder="Enter Password"
                 className=" my-1 w-32 text-sm bg-transparent font-pro outline-none px-3 placeholder:text-white/60"

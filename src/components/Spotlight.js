@@ -1,19 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { SearchIcon } from "@heroicons/react/outline";
 import useSlice from "../hooks/appSlice";
-function Spotlight() {
+import { Icons } from "../Data/appData";
+function Spotlight({ openW }) {
   const [search, setSearch] = useState(null);
   const [results, setResults] = useState(null);
-  const appList = [
-    { name: "Facetime" },
-    { name: "Mail" },
-    { name: "Mail2" },
-    { name: "Chrome" },
-  ];
   useEffect(() => {
     const matches =
       search?.length > 1 &&
-      appList.filter((element) => {
+      Icons.filter((element) => {
         if (element.name.toLowerCase().indexOf(search.toLowerCase()) !== -1) {
           return true;
         }
@@ -21,7 +16,7 @@ function Spotlight() {
     const web = [{ name: search }, { name: search }];
     setResults([web, matches]);
   }, [search]);
-  const { controlStates } = useSlice();
+  const { controlStates, setState } = useSlice();
   return (
     <div
       className={
@@ -37,6 +32,7 @@ function Spotlight() {
       >
         <SearchIcon className="w-6 text-gray-700 mr-3" />
         <input
+          autoFocus={true}
           type="text"
           placeholder="Spotlight Search"
           onChange={(lg) => setSearch(lg.target.value)}
@@ -45,7 +41,7 @@ function Spotlight() {
       </div>
 
       {search && (
-        <div className="bg-white/40 cursor-default backdrop-blur-xl shadow-xl border-t border-gray-400/40 py-2 px-3 rounded-b-xl">
+        <div className="bg-white/40 cursor-default backdrop-blur-xl shadow-xl border-t border-gray-400/40 py-2 px-1 rounded-b-xl">
           {results.map((item, index) => (
             <div
               key={`spotlist.main${index}`}
@@ -58,10 +54,30 @@ function Spotlight() {
               {item.length > 0 &&
                 item.map((docs, index) => (
                   <div
+                    onClick={(e) => {
+                      docs?.name === "Launchpad" || docs?.name === "Siri"
+                        ? openW([{ name: docs?.name, status: docs?.name }])
+                        : openW([
+                            {
+                              name:
+                                docs?.name === search
+                                  ? Icons[6].name
+                                  : docs?.name,
+                              window: docs?.window
+                                ? docs.window
+                                : Icons[6].window,
+                              status: "open",
+                            },
+                          ]);
+                      setState({ ...controlStates, spotlight: false });
+                    }}
                     key={`spotlist.sub${index}`}
-                    className="relative text-sm px-2 py-0.5 flex flex-row justify-between items-center hover:text-white rounded-md hover:bg-blue-500"
+                    className="relative text-sm px-2 py-0.5 flex flex-row items-center hover:text-white rounded-md hover:bg-blue-500"
                   >
-                    {docs?.name}
+                    <h1 className="w-5 mr-1">
+                      {docs?.icon ? docs?.icon : Icons[6].icon}
+                    </h1>
+                    <h1>{docs?.name}</h1>
                   </div>
                 ))}
             </div>

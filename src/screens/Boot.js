@@ -5,7 +5,7 @@ function Boot({ handle, state }) {
   const [load, setLoad] = useState(null);
   const handleBoot = (i, x) => {
     i === 0 && setLoad(" w-0");
-    i === 0 && handle.active && handle.enter();
+    i === 0 && !handle.active && handle.enter();
     setTimeout(() => {
       setLoad([" w-8", " w-56", " w-60", " w-60", " w-60"][i]);
       i !== 5 && handleBoot(i + 1);
@@ -17,7 +17,7 @@ function Boot({ handle, state }) {
       {load ? (
         <>
           <svg
-            className="w-24"
+            className="w-16"
             viewBox="0 0 256 315"
             xmlns="http://www.w3.org/2000/svg"
             preserveAspectRatio="xMidYMid"
@@ -32,10 +32,13 @@ function Boot({ handle, state }) {
           </div>
         </>
       ) : (
-        <>
+        <div
+          className="flex flex-col items-center cursor-pointer"
+          onClick={() => handleBoot(0)}
+        >
           <FingerPrintIcon className="w-8 mb-2" />
-          <div onClick={() => handleBoot(0)}>Power Up</div>
-        </>
+          <div>Power Up</div>
+        </div>
       )}
     </div>
   );

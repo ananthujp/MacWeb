@@ -5,8 +5,14 @@ function Window({ children, name, action, config, focus }) {
   const [wstate, setwState] = useState("normal");
   const [anim, setAnim] = useState(" ");
   const [windowState, setState] = useState({
-    x: 0.5 * window.innerWidth - 0.5 * config.width,
-    y: 0.5 * window.innerHeight - 0.5 * config.height,
+    x:
+      0.5 * window.innerWidth -
+      0.5 * config.width +
+      Math.floor(Math.random() * (60 + 60 + 1) - 60),
+    y:
+      0.5 * window.innerHeight -
+      0.5 * config.height +
+      Math.floor(Math.random() * (60 + 60 + 1) - 60),
     width: config.width,
     height: config.height,
   });
