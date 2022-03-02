@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
-function Spinner() {
-  const color = "origin-[60%_-60%] w-0.5 h-1.5 bg-gray-800";
+function Spinner({ col }) {
+  const color = "origin-[60%_-60%] w-0.5 h-1.5 " + (col ? col : "bg-gray-800");
   return (
     <div className="relative mr-0.5 mt-1.5">
       <motion.div

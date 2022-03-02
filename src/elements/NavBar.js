@@ -3,41 +3,72 @@ import useSlice from "../hooks/appSlice";
 
 import { SearchIcon, WifiIcon } from "@heroicons/react/outline";
 
-const appleMenu = [
-  [{ name: "About This Mac" }],
-  [{ name: "System Preferences..." }, { name: "App Store..." }],
-
-  [{ name: "Sleep" }, { name: "Restart..." }, { name: "Shut Down..." }],
-  [{ name: "Lock Screen" }, { name: "Log Out ..." }],
-];
-const fileMenu = [
-  [
-    { name: "New Finder Window" },
-    { name: "New Folder" },
-    { name: "New Smart Folder" },
-    { name: "New Tab" },
-  ],
-];
-const finderMenu = [
-  [{ name: "About Finder" }],
-  [{ name: "Preferences" }],
-  [{ name: "Empty Bin" }],
-  [
-    {
-      name: "Services",
-      shade: true,
-      shadeItems: [
-        [{ name: "Acitivity Monitor" }],
-        [{ name: "File Activity" }],
-      ],
-    },
-    { name: "Hide Finder" },
-  ],
-];
-function NavBar() {
+function NavBar({ systemState }) {
   const [time, setTime] = useState(Date().substring(16, 21));
 
   const { context, setContext, controlStates, setState } = useSlice();
+  const appleMenu = [
+    [{ name: "About This Mac" }],
+    [{ name: "System Preferences..." }, { name: "App Store..." }],
+
+    [
+      { name: "Sleep" },
+      {
+        name: (
+          <div onClick={() => setTimeout(() => systemState("boot"), 200)}>
+            Restart...
+          </div>
+        ),
+      },
+      {
+        name: (
+          <div onClick={() => setTimeout(() => systemState("boot"), 200)}>
+            Shut Down...
+          </div>
+        ),
+      },
+    ],
+    [
+      {
+        name: (
+          <div onClick={() => setTimeout(() => systemState("login"), 200)}>
+            Lock Screen
+          </div>
+        ),
+      },
+      {
+        name: (
+          <div onClick={() => setTimeout(() => systemState("login"), 200)}>
+            Log Out
+          </div>
+        ),
+      },
+    ],
+  ];
+  const fileMenu = [
+    [
+      { name: "New Finder Window" },
+      { name: "New Folder" },
+      { name: "New Smart Folder" },
+      { name: "New Tab" },
+    ],
+  ];
+  const finderMenu = [
+    [{ name: "About Finder" }],
+    [{ name: "Preferences" }],
+    [{ name: "Empty Bin" }],
+    [
+      {
+        name: "Services",
+        shade: true,
+        shadeItems: [
+          [{ name: "Acitivity Monitor" }],
+          [{ name: "File Activity" }],
+        ],
+      },
+      { name: "Hide Finder" },
+    ],
+  ];
   const LeftItems = [
     {
       name: (

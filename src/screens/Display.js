@@ -45,7 +45,7 @@ const Items = [
     { name: "Show View Options" },
   ],
 ];
-function Display({ handle }) {
+function Display({ handle, systemState }) {
   const { context, setContext, controlStates, setState } = useSlice();
   const [wDowsz, setWindow] = useState(null);
   const [wDows, setWindowz] = useState(null);
@@ -177,7 +177,7 @@ function Display({ handle }) {
         options={context}
       />
 
-      <NavBar />
+      <NavBar systemState={systemState} />
       {siri ? <Siri hide={setSiri} /> : <></>}
       <Notch />
       <Dock openW={setWindow} />
