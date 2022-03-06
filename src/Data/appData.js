@@ -118,7 +118,7 @@ export const Icons = [
         src="https://uploads-ssl.webflow.com/5f7081c044fb7b3321ac260e/5f70853ddd826358438eda6d_safari.png"
       />
     ),
-    window: { width: 800, height: 600, resize: true },
+    window: { width: 1000, height: 600, resize: true },
   },
   {
     name: "Calculator",
@@ -142,5 +142,18 @@ export const Icons = [
       />
     ),
     window: { width: 400, height: 80, resize: false },
+  },
+];
+export const Dialogs = [
+  {
+    name: "About this mac",
+    txt: "AboutDialog",
+    icon: (
+      <img
+        alt=""
+        src="https://uploads-ssl.webflow.com/5f7081c044fb7b3321ac260e/5f70853981255cc36b3a37af_finder.png"
+      />
+    ),
+    window: { width: 600, height: 350, resize: false },
   },
 ];

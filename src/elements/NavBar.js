@@ -1,14 +1,32 @@
 import React, { useEffect, useState } from "react";
 import useSlice from "../hooks/appSlice";
-
+import { Dialogs } from "../Data/appData";
 import { SearchIcon, WifiIcon } from "@heroicons/react/outline";
 
-function NavBar({ systemState }) {
+function NavBar({ systemState, openW }) {
   const [time, setTime] = useState(Date().substring(16, 21));
 
   const { context, setContext, controlStates, setState } = useSlice();
   const appleMenu = [
-    [{ name: "About This Mac" }],
+    [
+      {
+        name: (
+          <div
+            onClick={() =>
+              openW([
+                {
+                  name: Dialogs[0].txt,
+                  window: Dialogs[0].window,
+                  status: "open",
+                },
+              ])
+            }
+          >
+            About This Mac
+          </div>
+        ),
+      },
+    ],
     [{ name: "System Preferences..." }, { name: "App Store..." }],
 
     [
@@ -127,7 +145,7 @@ function NavBar({ systemState }) {
   return (
     <div
       className="absolute h-6 top-0 w-full backdrop-blur-xl
-  bg-white/30 cursor-default flex flex-row justify-between items-center"
+  bg-white/30 dark:bg-white/10 cursor-default flex flex-row justify-between items-center"
     >
       <div className=" mx-2 flex flex-row text-white items-center">
         {LeftItems.map((item, index) => (

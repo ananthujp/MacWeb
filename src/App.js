@@ -6,7 +6,7 @@ import { useState } from "react";
 import Boot from "./screens/Boot";
 function App() {
   const handle = useFullScreenHandle();
-  const [system, setSystem] = useState("system");
+  const [system, setSystem] = useState("boot");
   return (
     <FullScreen handle={handle}>
       <div className="w-screen h-screen">

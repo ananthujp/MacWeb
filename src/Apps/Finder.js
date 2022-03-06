@@ -10,6 +10,7 @@ import {
   DocumentIcon,
   FolderOpenIcon,
 } from "@heroicons/react/outline";
+import { Window } from "../Colors/Window";
 const sideBarItems = [
   {
     name: "Favourites",
@@ -75,7 +76,11 @@ const sideBarItems = [
 function Finder() {
   return (
     <div className="flex flex-row w-full h-full">
-      <div className="flex flex-col bg-white/60 backdrop-blur-xl h-full w-48 max-w-48">
+      <div
+        className={
+          "flex flex-col backdrop-blur-xl h-full w-48 max-w-48 " + Window.Glass
+        }
+      >
         {/* Section Left */}
         <div className="windowHandle  cursor-default  flex items-center pl-3 text-sm font-bold text-gray-800 h-12 max-h-12 bg-trasparent">
           {/* Left Title */}
@@ -95,12 +100,17 @@ function Finder() {
         </div>
       </div>
       <div className="flex flex-col bg-gray-50 w-full h-full ">
-        <div className="windowHandle cursor-default flex items-center pl-4 text-sm font-bold text-gray-600 h-12 bg-gray-200 border-b border-gray-300">
+        <div
+          className={
+            "windowHandle cursor-default flex items-center pl-4 text-sm font-bold text-gray-600 h-12  border-b border-gray-300 " +
+            Window.TitleBar
+          }
+        >
           <ChevronLeftIcon className="w-8 text-gray-400 hover:bg-gray-300/60 py-1 px-1.5 rounded-md" />
           <ChevronRightIcon className="w-8 mr-2  hover:bg-gray-300/60 py-1 px-1.5 rounded-md" />
           Recents
         </div>
-        <div></div>
+        <div className={Window.Bg + "w-full h-full"}></div>
       </div>
     </div>
   );

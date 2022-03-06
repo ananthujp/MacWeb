@@ -30,8 +30,14 @@ function Window({ children, name, action, config, focus }) {
       case "maxs":
         setAnim(" transition-all duration-750");
         setState({
-          x: 0.5 * window.innerWidth - 0.5 * config.width,
-          y: 0.5 * window.innerHeight - 0.5 * config.height,
+          x:
+            0.5 * window.innerWidth -
+            0.5 * config.width +
+            Math.floor(Math.random() * (60 + 60 + 1) - 60),
+          y:
+            0.5 * window.innerHeight -
+            0.5 * config.height +
+            Math.floor(Math.random() * (60 + 60 + 1) - 60),
           width: config.width,
           height: config.height,
         });
@@ -59,7 +65,12 @@ function Window({ children, name, action, config, focus }) {
       <div className="absolute left-2 top-4 z-10 group flex flex-row">
         <div
           onClick={() => handleClose()}
-          className="w-3 h-3 rounded-full mx-1 active:bg-red-600/70 bg-red-500/80 border border-red-600/80"
+          className={
+            "w-3 h-3 rounded-full mx-1 " +
+            (focus
+              ? " active:bg-red-600/70 bg-red-500/80 border border-red-600/80 "
+              : " bg-gray-400/80 group-hover:bg-red-500/80 group-hover:border-red-600/80 border-gray-400/80 ")
+          }
         >
           <div className="hidden group-hover:block">
             <XIcon />
@@ -67,7 +78,12 @@ function Window({ children, name, action, config, focus }) {
         </div>
         <div
           onClick={() => setwState("min")}
-          className="w-3 h-3 rounded-full mx-1 active:bg-yellow-600/70  bg-yellow-500/70 border border-yellow-600/80"
+          className={
+            "w-3 h-3 rounded-full mx-1 " +
+            (focus
+              ? " active:bg-yellow-600/70  bg-yellow-500/70 border border-yellow-600/80 "
+              : " bg-gray-400/80 border-gray-400/80 group-hover:border-yellow-600/80 group-hover:bg-yellow-500/70")
+          }
         >
           <div className="hidden group-hover:block">
             <MinusIcon />
@@ -79,9 +95,20 @@ function Window({ children, name, action, config, focus }) {
               ? setwState("maxs")
               : setwState("max");
           }}
-          className="w-3 h-3 rounded-full mx-1 active:bg-green-600/70 bg-green-500/70 border border-green-600/80"
+          className={
+            "w-3 h-3 rounded-full mx-1 active:bg-green-600/70 border " +
+            (config.resize
+              ? focus
+                ? "  bg-green-500/70 border-green-600/80"
+                : " bg-gray-400/80 border-gray-400/80 group-hover:bg-green-500/70 group-hover:border-green-600/80"
+              : "  bg-gray-400/80 border-gray-400/80 pointer-events-none")
+          }
         >
-          <div className="hidden group-hover:block rotate-45">
+          <div
+            className={
+              "hidden rotate-45" + (config.resize ? "  group-hover:block" : " ")
+            }
+          >
             <CodeIcon />
           </div>
         </div>

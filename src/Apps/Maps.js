@@ -10,6 +10,7 @@ import {
 import { motion } from "framer-motion";
 import { HomeIcon, BriefcaseIcon } from "@heroicons/react/solid";
 import { Map, Marker } from "pigeon-maps";
+import { BorderClass, TabButton, Text, Window } from "../Colors/Window";
 const sideBarItems = [
   {
     name: "Favourites",
@@ -44,14 +45,22 @@ function Maps() {
           transition: { duration: 1 },
         }}
         className={
-          "flex-col border-r border-gray-200 bg-gray-50 backdrop-blur-xl h-full w-96 max-w-96 " +
-          (sidebar ? " flex" : " hidden ")
+          "flex-col border-r backdrop-blur-xl h-full w-96 max-w-96 " +
+          (sidebar ? " flex" : " hidden ") +
+          Window.TitleBar +
+          BorderClass.light
         }
       >
         {/* Section Left */}
         <div className="windowHandle  cursor-default  flex flex-row justify-between items-center pl-20 pr-2 text-sm font-bold text-gray-500 h-12 max-h-12 bg-trasparent"></div>
         <div className="flex flex-col px-2 pt-4 overflow-y-auto cursor-default">
-          <div className="flex flex-row rounded-md bg-gray-100 border border-gray-200 p-1">
+          <div
+            className={
+              "flex flex-row rounded-md border p-1" +
+              Window.Light +
+              BorderClass.light
+            }
+          >
             <SearchIcon className="w-4 mr-2" />
             <input
               type="text"
@@ -67,12 +76,15 @@ function Maps() {
                   <div className="flex flex-row">
                     <div
                       alt=""
-                      className="flex items-center justify-center text-blue-500 bg-gray-200 w-8 h-8 object-cover rounded-full"
+                      className={
+                        "flex items-center justify-center text-blue-500  w-8 h-8 object-cover rounded-full" +
+                        Window.Semi
+                      }
                     >
                       {dc.icon}
                     </div>
                     <div className="flex flex-col ml-2 justify-center w-44">
-                      <h1 className="text-black font-default">{dc.name}</h1>
+                      <h1 className={"font-default " + Text.dark}>{dc.name}</h1>
                       <div className="flex flex-row">Add</div>
                     </div>
                   </div>
@@ -89,8 +101,14 @@ function Maps() {
           ))}
         </div>
       </motion.div>
-      <div className="flex flex-col bg-gray-50 w-full h-full ">
-        <div className="windowHandle flex-row justify-between cursor-default flex items-center px-4 text-sm font-bold text-gray-600 h-12 bg-gray-50 border-b border-gray-300 ">
+      <div className={"flex flex-col w-full h-full " + Window.TitleBar}>
+        <div
+          className={
+            "windowHandle flex-row justify-between cursor-default flex items-center px-4 text-sm font-bold text-gray-600 h-12 border-b  " +
+            TabButton[2] +
+            Window.TitleBar
+          }
+        >
           <div
             className={
               "flex flex-row items-center" + (sidebar ? " " : " ml-14")

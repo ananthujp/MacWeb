@@ -4,7 +4,8 @@ import ContextMenu from "../elements/ContextMenu";
 import Dock from "../elements/Dock";
 import NavBar from "../elements/NavBar";
 import useSlice from "../hooks/appSlice";
-import bg from "../Images/bg-day.webp";
+import bgDay from "../Images/bg-day.webp";
+import bgNight from "../Images/bg-night.webp";
 import ControlCenter from "../components/ControlCenter";
 import Spotlight from "../components/Spotlight";
 import Window from "../elements/Window";
@@ -19,6 +20,8 @@ import Launchpad from "./Launchpad";
 import Calculator from "../Apps/Calculator";
 import Notch from "../elements/Notch";
 import Siri from "../Apps/Siri";
+import Folders from "../elements/Folders";
+import About from "../Dialogs/About";
 const Items = [
   [{ name: "New Folder" }],
   [{ name: "Get Info" }, { name: "Change Desktop Background.." }],
@@ -46,6 +49,8 @@ const Items = [
   ],
 ];
 function Display({ handle, systemState }) {
+  const bg =
+    document.documentElement.classList.value === "light" ? bgDay : bgNight;
   const { context, setContext, controlStates, setState } = useSlice();
   const [wDowsz, setWindow] = useState(null);
   const [wDows, setWindowz] = useState(null);
@@ -126,6 +131,9 @@ function Display({ handle, systemState }) {
         return <Safari />;
       case "Calculator":
         return <Calculator />;
+      case "AboutDialog":
+        return <About />;
+
       default:
         return <Finder />;
     }
@@ -141,16 +149,6 @@ function Display({ handle, systemState }) {
       <ControlCenter handle={handle} />
       {launchpad ? <Launchpad hide={setLaunch} openW={setWindow} /> : <></>}
       <Spotlight openW={setWindow} />
-      {/* {wDows?.map((wdow, i) => (
-        <Window
-          key={`opened.Window${i}`}
-          name={wdow.name}
-          config={wdow.window}
-          action={setWindow}
-        >
-          {windowSwitch(wdow.name)}
-        </Window>
-      ))} */}
       {wDows &&
         Object.keys(wDows).map(
           (dc, i) =>
@@ -177,9 +175,10 @@ function Display({ handle, systemState }) {
         options={context}
       />
 
-      <NavBar systemState={systemState} />
+      <NavBar systemState={systemState} openW={setWindow} />
       {siri ? <Siri hide={setSiri} /> : <></>}
       <Notch />
+      <Folders />
       <Dock openW={setWindow} />
     </div>
   );

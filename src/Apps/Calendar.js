@@ -6,6 +6,7 @@ import {
   ChevronRightIcon,
   SearchIcon,
 } from "@heroicons/react/outline";
+import { BorderClass, ButtonClass, TabButton, Window } from "../Colors/Window";
 const months = [
   "January",
   "February",
@@ -122,7 +123,7 @@ const Timeline = () => {
             </div>
             <div
               key={`time.child2${i}`}
-              className="h-3 border-b border-gray-300"
+              className={"h-3 border-b " + TabButton[2]}
             ></div>
           </>
         ))}
@@ -190,7 +191,7 @@ const DayView = () => {
 
         <Timeline />
       </div>
-      <div className="flex flex-row items-start bg-gray-300">
+      <div className={"flex flex-row items-start " + Window.Shade}>
         <MonthDay m={d.m} y={d.y} d={d.d} />
 
         <div className="flex flex-row mt-2">
@@ -207,7 +208,10 @@ const DayView = () => {
                     : d.d - 1,
               })
             }
-            className="flex h-6 rounded-md cursor-default bg-white active:bg-gray-200 shadow-md px-1 mx-1 py-0.5 text-sm"
+            className={
+              "flex h-6 rounded-md cursor-default shadow-md px-1 mx-1 py-0.5 text-sm " +
+              ButtonClass
+            }
           >
             <ChevronLeftIcon className="w-4" />
           </div>
@@ -219,7 +223,10 @@ const DayView = () => {
                 y: new Date().getFullYear(),
               })
             }
-            className="flex h-6 rounded-md cursor-default bg-white active:bg-gray-200 shadow-md px-4 py-0.5 text-sm"
+            className={
+              "flex h-6 rounded-md cursor-default bg-white active:bg-gray-200 shadow-md px-4 py-0.5 text-sm " +
+              ButtonClass
+            }
           >
             Today
           </div>
@@ -241,7 +248,10 @@ const DayView = () => {
                     : d.d + 1,
               })
             }
-            className="flex h-6 rounded-md cursor-default bg-white active:bg-gray-200 shadow-md px-1  mx-1 py-0.5 text-sm"
+            className={
+              "flex h-6 rounded-md cursor-default bg-white active:bg-gray-200 shadow-md px-1  mx-1 py-0.5 text-sm " +
+              ButtonClass
+            }
           >
             <ChevronRightIcon className="w-4" />
           </div>
@@ -271,7 +281,10 @@ const MonthView = () => {
                 m: d.m === 0 ? (d.m = 11) : d.m - 1,
               })
             }
-            className="flex rounded-md cursor-default bg-white active:bg-gray-200 shadow-md px-1 mx-1 py-0.5 text-sm"
+            className={
+              "flex rounded-md cursor-default shadow-md px-1 mx-1 py-0.5 text-sm " +
+              ButtonClass
+            }
           >
             <ChevronLeftIcon className="w-4" />
           </div>
@@ -282,7 +295,10 @@ const MonthView = () => {
                 y: new Date().getFullYear(),
               })
             }
-            className="flex rounded-md cursor-default bg-white active:bg-gray-200 shadow-md px-4 py-0.5 text-sm"
+            className={
+              "flex rounded-md cursor-default shadow-md px-4 py-0.5 text-sm " +
+              ButtonClass
+            }
           >
             Today
           </div>
@@ -293,7 +309,10 @@ const MonthView = () => {
                 m: d.m === 11 ? (d.m = 0) : d.m + 1,
               })
             }
-            className="flex rounded-md cursor-default bg-white active:bg-gray-200 shadow-md px-1  mx-1 py-0.5 text-sm"
+            className={
+              "flex rounded-md cursor-default shadow-md px-1  mx-1 py-0.5 text-sm " +
+              ButtonClass
+            }
           >
             <ChevronRightIcon className="w-4" />
           </div>
@@ -312,7 +331,7 @@ const MonthView = () => {
         {Days.map((dc, index) => (
           <h1
             key={`days.monthview.${index}`}
-            className="border border-gray-200 pr-2"
+            className={"border pr-2" + BorderClass.light}
           >
             {dc}
           </h1>
@@ -350,7 +369,10 @@ const WeekView = () => {
                 w: d.w === 0 ? 5 : d.w - 1,
               })
             }
-            className="flex rounded-md cursor-default bg-white active:bg-gray-200 shadow-md px-1 mx-1 py-0.5 text-sm"
+            className={
+              "flex rounded-md cursor-default shadow-md px-1 mx-1 py-0.5 text-sm " +
+              ButtonClass
+            }
           >
             <ChevronLeftIcon className="w-4" />
           </div>
@@ -371,7 +393,10 @@ const WeekView = () => {
                 ),
               })
             }
-            className="flex rounded-md cursor-default bg-white active:bg-gray-200 shadow-md px-4 py-0.5 text-sm"
+            className={
+              "flex rounded-md cursor-default shadow-md px-4 py-0.5 text-sm " +
+              ButtonClass
+            }
           >
             Today
           </div>
@@ -383,7 +408,10 @@ const WeekView = () => {
                 w: d.w === 5 ? 0 : d.w + 1,
               })
             }
-            className="flex rounded-md cursor-default bg-white active:bg-gray-200 shadow-md px-1  mx-1 py-0.5 text-sm"
+            className={
+              "flex rounded-md cursor-default shadow-md px-1  mx-1 py-0.5 text-sm " +
+              ButtonClass
+            }
           >
             <ChevronRightIcon className="w-4" />
           </div>
@@ -426,19 +454,28 @@ const YearView = () => {
         <div className="flex flex-row">
           <div
             onClick={() => setY(y - 1)}
-            className="flex rounded-md cursor-default bg-white active:bg-gray-200 shadow-md px-1 mx-1 py-0.5 text-sm"
+            className={
+              "flex rounded-md cursor-default shadow-md px-1 mx-1 py-0.5 text-sm " +
+              ButtonClass
+            }
           >
             <ChevronLeftIcon className="w-4" />
           </div>
           <div
             onClick={() => setY(new Date().getFullYear())}
-            className="flex rounded-md cursor-default bg-white active:bg-gray-200 shadow-md px-4 py-0.5 text-sm"
+            className={
+              "flex rounded-md cursor-default shadow-md px-4 py-0.5 text-sm " +
+              ButtonClass
+            }
           >
             Today
           </div>
           <div
             onClick={() => setY(y + 1)}
-            className="flex rounded-md cursor-default bg-white active:bg-gray-200 shadow-md px-1  mx-1 py-0.5 text-sm"
+            className={
+              "flex rounded-md cursor-default shadow-md px-1  mx-1 py-0.5 text-sm " +
+              ButtonClass
+            }
           >
             <ChevronRightIcon className="w-4" />
           </div>
@@ -613,6 +650,13 @@ const renderSwitch = (param) => {
 function Calendar() {
   const [sidebar, setSidebar] = useState(false);
   const [view, setView] = useState("month");
+  const [tab, setTab] = useState("Day");
+  const Tabs = [
+    { txt: "Day", screen: <DayView /> },
+    { txt: "Week", screen: <WeekView /> },
+    { txt: "Month", screen: <MonthView /> },
+    { txt: "Year", screen: <YearView /> },
+  ];
   return (
     <div className="flex flex-row w-full h-full">
       <motion.div
@@ -649,10 +693,12 @@ function Calendar() {
           ))}
         </div>
       </motion.div>
-      <div className="flex flex-col bg-gray-50 w-full h-full ">
+      <div className={"flex flex-col w-full h-full " + Window.Bg}>
         <div
           className={
-            "windowHandle cursor-default flex flex-row justify-between items-center pl-4 text-sm font-bold text-gray-600 h-12 min-h-[40px] bg-gray-200 border-b border-gray-300"
+            "windowHandle cursor-default flex flex-row justify-between items-center pl-4 text-sm font-bold text-gray-600 h-12 min-h-[40px] border-b " +
+            Window.TitleBar +
+            TabButton[2]
           }
         >
           <div
@@ -662,45 +708,26 @@ function Calendar() {
             <CalendarIcon className="w-8 hover:bg-gray-300/60 py-1 px-1.5 rounded-md" />
           </div>
           <div className="border rounded-md border-gray-500/20 flex flex-row font-normal text-xs">
-            <div
-              onClick={() => setView("day")}
-              className={
-                "pr-2 pl-4 py-1 hover:bg-gray-300 " +
-                (view === "day" ? "bg-gray-300 border-l-md" : "")
-              }
-            >
-              Day{" "}
-            </div>
-            <div
-              onClick={() => setView("week")}
-              className={
-                "pl-2  py-1 pr-2 border-l border-gray-300 hover:bg-gray-300 " +
-                (view === "week" ? "bg-gray-300 " : "")
-              }
-            >
-              Week
-            </div>
-            <div
-              onClick={() => setView("month")}
-              className={
-                "pl-2  py-1 pr-2 border-l border-gray-300 hover:bg-gray-300 " +
-                (view === "month" ? "bg-gray-300 " : "")
-              }
-            >
-              Month
-            </div>
-            <div
-              onClick={() => setView("year")}
-              className={
-                "pl-2  py-1 pr-4 border-l border-gray-300  hover:bg-gray-300 " +
-                (view === "year" ? "bg-gray-300 rounded-r-md" : "")
-              }
-            >
-              Year
-            </div>
+            {Tabs.map((dc, i) => (
+              <div
+                onClick={() => setTab(dc.txt)}
+                className={
+                  "px-4 py-0.5  " +
+                  TabButton[0] +
+                  (i !== 0 ? " border-l " + TabButton[2] : " ") +
+                  (dc.txt === tab ? TabButton[1] : " ")
+                }
+              >
+                {dc.txt}
+              </div>
+            ))}
           </div>
           <div>
-            <div className="flex flex-row rounded-md border border-gray-300 p-1 mr-2">
+            <div
+              className={
+                "flex flex-row rounded-md border p-1 mr-2 " + TabButton[2]
+              }
+            >
               <SearchIcon onClick={() => month(0)} className="w-4 mr-2" />
               <input
                 type="text"
@@ -711,7 +738,9 @@ function Calendar() {
           </div>
         </div>
 
-        <div className=" h-full">{renderSwitch(view)}</div>
+        <div className=" h-full">
+          {Tabs.map((dc, i) => tab === dc.txt && dc.screen)}
+        </div>
       </div>
     </div>
   );
