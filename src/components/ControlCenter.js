@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   WifiIcon,
   SunIcon,
@@ -64,11 +64,8 @@ const Icon = ({ n, state }) => {
   }
 };
 function ControlCenter({ handle }) {
-  const { controlStates } = useSlice();
+  const { theme, setTheme, controlStates } = useSlice();
   const dispatch = useDispatch();
-  const [darkMode, setDarkmode] = useState(
-    document.documentElement.classList.value === "light" ? false : true
-  );
   const controlState = useSelector(selectControlStates);
   const handleButtons = (n) => {
     switch (n) {
@@ -135,11 +132,6 @@ function ControlCenter({ handle }) {
       default:
     }
   };
-  useEffect(() => {
-    darkMode
-      ? document.documentElement.classList.remove("dark")
-      : document.documentElement.classList.add("dark");
-  }, [darkMode]);
 
   return (
     <motion.div
@@ -199,10 +191,12 @@ function ControlCenter({ handle }) {
         </div>
         <div className="flex flex-col">
           <div
-            onClick={() => setDarkmode(!darkMode)}
+            onClick={() =>
+              theme === "dark" ? setTheme("light") : setTheme("dark")
+            }
             className="flex fle-row bg-white/10 items-center backdrop-blur-xl ml-1 mb-1 shadow-sm px-2 py-4 rounded-xl "
           >
-            <Icon n={3} state={darkMode ? 0 : true} />
+            <Icon n={3} state={theme === "dark" ? true : 0} />
             <h1>Dark Mode</h1>
           </div>
           <div

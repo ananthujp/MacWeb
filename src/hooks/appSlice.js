@@ -36,6 +36,9 @@ const AppContext = createContext({});
 export const AppProvider = ({ children }) => {
   //const [user,setUser]=useState(null);
   const [launchpad, showLaunchpad] = useState(false);
+  const [theme, setTheme] = useState(
+    window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
+  );
   const [context, setContext] = useState({
     pageX: 0,
     pageY: 0,
@@ -54,9 +57,11 @@ export const AppProvider = ({ children }) => {
     volume: 0,
     spotlight: false,
   });
-  // useEffect(() => {
-  //   console.log(context.show);
-  // }, [context]);
+  useEffect(() => {
+    theme === "light"
+      ? document.documentElement.classList.remove("dark")
+      : document.documentElement.classList.add("dark");
+  }, [theme]);
 
   const memoedValue = useMemo(
     () => ({
@@ -66,8 +71,10 @@ export const AppProvider = ({ children }) => {
       showLaunchpad,
       controlStates,
       setState,
+      theme,
+      setTheme,
     }),
-    [context, launchpad, controlStates]
+    [context, launchpad, controlStates, theme]
   );
 
   return (

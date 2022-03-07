@@ -49,9 +49,8 @@ const Items = [
   ],
 ];
 function Display({ handle, systemState }) {
-  const bg =
-    document.documentElement.classList.value === "light" ? bgDay : bgNight;
-  const { context, setContext, controlStates, setState } = useSlice();
+  const { theme, context, setContext, controlStates, setState } = useSlice();
+  const bg = theme === "light" ? bgDay : bgNight;
   const [wDowsz, setWindow] = useState(null);
   const [wDows, setWindowz] = useState(null);
   const [launchpad, setLaunch] = useState(false);
