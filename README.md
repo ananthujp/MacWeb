@@ -5,7 +5,7 @@
 Web macOS is a project that aims to recreate the user interface and user experience of macOS using React.js. It provides a web-based version of the popular operating system, allowing users to interact with familiar macOS features directly from their web browser.
 <img src="https://github.com/ananthujp/MacWeb/blob/gh-pages/Preview.png" alt=""/>
 <h3>Demo</h3>
-Check out the live demo <a href="ananthujp.github.io/MacWeb">here</a>.
+Check out the live demo <a href="http://ananthujp.github.io/MacWeb">here</a>.
 
 <h3>Features</h3>
 Familiar Interface: Experience the look and feel of macOS right in your web browser.
