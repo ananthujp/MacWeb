@@ -1,5 +1,6 @@
-<h1>macOS Web - A macOS Experience on the Web</h1>h1>
-<h2>macOS Web</h2>h2>
+<h1>macOS Web - A macOS Experience on the Web</h1>
+
+<h2>macOS Web</h2>
 
 Web macOS is a project that aims to recreate the user interface and user experience of macOS using React.js. It provides a web-based version of the popular operating system, allowing users to interact with familiar macOS features directly from their web browser.
 
