@@ -10,7 +10,6 @@ function App() {
   return (
     <FullScreen handle={handle}>
       <div className="w-screen h-screen">
-        {/*  */}
         {system === "boot" && <Boot state={setSystem} handle={handle} />}
         {system === "login" && <Login state={setSystem} />}
         {system === "system" && (
